@@ -1,55 +1,98 @@
+//Récupération des données API pour les intégrer à la page
+
 fetch ("http://localhost:3000/api/cameras")
     .then( res => res.json())
     .then(data => {
         const articlesContainer = document.getElementById('articles');
-      for (let article of data) {
+        for (let article of data) {
           articlesContainer.innerHTML += 
-          `<figure>
-          <img src="${article.imageUrl}" alt="${article.name}">
-          <figcaption>
-              <h2>${article.name}</h2>
-              <p>${article.description}</p>
-          </figcaption>
-          </figure>`;
-      }
+          ` 
+                <div class="col-12 col-lg-5 card">
+                    <div class="card-body" >
+                        <img class="col" src="${article.imageUrl}" alt="${article.name}">
+                        <h2 class"card-title ">${article.name}</h2>
+                        <p>${article.description}</p>
+                    </div>
+                    <div class="row">
+                            <a href="/produit.html?id=${article._id}" class="btn btn-primary acheterpanier col-6"  role="button">Acheter ${article.price/100 + ' ' + '€'}</a>
+                            <a class="btn btn-primary col-4 add-cart"  role="button">Ajouter au panier</a>
+                    </div>
+
+                    <form>
+                    <label for="option_produit"> Choisir l'option</label>
+                        <select name="option_produit" id="option_produit">
+                            <option value="option_1">option_1</option>
+                            <option value="option_2">option_2</option>
+                        </select>
+                    </form>
+                    
+                </div>
+          `;
+        }
+        /*console.log(data);
+    
+        const cart = document.querySelectorAll('.add-cart');
+            console.log(cart);
+        for (let i = 0; i < cart.length; i++ ) {
+            cart[i].addEventListener('click' , () =>  {
+                cartsNumbers(data[i]);
+            })
+        }
+        
+        function loadPanier () {
+            let camerasNumbers = localStorage.getItem('cartNumbers');
+            document.querySelector('.panier span').textContent = camerasNumbers;
+        }
+
+        function cartsNumbers(data) {
+            console.log('le produit est', data)
+            let camerasNumbers = localStorage.getItem('cartNumbers');
+
+        camerasNumbers = parseInt(camerasNumbers);
+
+        if (camerasNumbers) {
+            localStorage.setItem('cartNumbers', camerasNumbers + 1);
+            document.querySelector('.panier span').textContent = camerasNumbers + 1;
+        }
+        else {
+            localStorage.setItem('cartNumbers', 1);
+            document.querySelector('.panier span').textContent = 1;
+        }
+
+        //setItems(data);
+    }
+
+    function setItems(data) {
+        console.log(data)
+        let camerasItems =  localStorage.getItem('camerasDansPanier');
+        camerasItems = JSON.parse(camerasItems);
+
+        camerasItems = localStorage.setItem('camerasDansPanier', JSON.stringify(data));
+
+        
+        if (localStorage.length == 0) {
+            console.log('rien dans le panier')
+
+            let data = []
+            newData.push(data);
+
+            let dataPaniers = JSON.stringify(newDataPaniers)
+
+            localStorage.setItem('camerasDansPanier', JSON.stringify(data) );
+        }
+
+    
+        
+     
+    }
+
+    loadPanier ()*/
+
+
+
+
+
     });
 
 
-/*main() 
- async function main(){
-    const articles = await getArticles()
-    for (const article of articles) {
-        displayArticles(article)
-        console.log(displayArticles(article))
-    }
-}
 
-function getArticles() {
-    return fetch ("http://localhost:3000/api/cameras")
-    .then(function(httpCameras) {
-        if (httpCameras.ok) {
-            return httpCameras.json();
-        }
-    })
-    .then (function(articlesCameras) {
-        return articles;
-    })
-
-    .catch (function(error) {
-        alert(error)
-    })
-
-}
-
-function displayArticles(article){
-    
-    document.getElementById("articles").innerHTML += 
-    `<figure>
-    <img src="${article.imageUrl}" alt="${article.name}">
-    <figcaption>
-        <h2>${article.name}</h2>
-        <p>${article.description}</p>
-    </figcaption>
-    </figure>`
-
-} */
