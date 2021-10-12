@@ -15,20 +15,13 @@ fetch ("http://localhost:3000/api/cameras")
                     </div>
                     <div class="row">
                             <a href="/produit.html?id=${article._id}" class="btn btn-primary acheterpanier col-6"  role="button">Acheter ${article.price/100 + ' ' + '€'}</a>
-                            <a class="btn btn-primary col-4 add-cart"  role="button">Ajouter au panier</a>
+                            
                     </div>
-
-                    <form>
-                    <label for="option_produit"> Choisir l'option</label>
-                        <select name="option_produit" id="option_produit">
-                            <option value="option_1">option_1</option>
-                            <option value="option_2">option_2</option>
-                        </select>
-                    </form>
                     
                 </div>
           `;
         }
+        
         /*console.log(data);
     
         const cart = document.querySelectorAll('.add-cart');

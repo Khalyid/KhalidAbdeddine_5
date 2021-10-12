@@ -7,6 +7,7 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
     .then( res => res.json())
     .then(data => {
         const articlesContainer = document.getElementById('articles')
+        
 
           articlesContainer.innerHTML += 
           ` 
@@ -28,8 +29,6 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
                             <option value="Noir">Noir</option>
                         </select>
                     </form>
-
-                    
                     
                 </div>
           `
@@ -54,7 +53,7 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
             price : data.price/100,
             imageUrl : data.imageUrl,
             option : choixForm
-          }
+            }
 
           console.log(panierProduit)
 
