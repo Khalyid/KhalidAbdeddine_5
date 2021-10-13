@@ -28,45 +28,23 @@ else {
 
                     <div id="container-recapitulatif" >
                         <img class="col" src="${productCamera.imageUrl}" alt="${productCamera.name}">
-                        <p>${productCamera.name} ${productCamera.option} - Quantité 1</p>
-                        <p>${productCamera.price + ' ' + '€'} - <button class="btn-supprimer" data-id="${i}">Supprimer article</button> </p>
+                        <p>${productCamera.name}</p> 
+                        <p>${productCamera.option} - Quantité 1</p>
+                        <p>${productCamera.price + ' ' + '€'} 
+                        <button class="btn-supprimer" data-id="${i}">Supprimer article</button> </p>
                     </div>
 
                     <div class="container-montant-total">
-                        <p>Montant total = 190 €</p>
                         <p>Vider le panier</p>
                     </div>
                   
                 </div>
         `;
-
-        // Création code HTML pour le bouton Vider le panier entierement
-
-        let codeVider_panier = `
-        <button class="vider-panier"> Vider le panier </button>
-        `;
-
-        //Insértion le code HTML boutton vider panier
-        displayPanier.insertAdjacentHTML("beforeend", codeVider_panier);
-
-        btnVider_panier = document.querySelector('.vider-panier');
-        console.log(btnVider_panier);
-
-        btnVider_panier.addEventListener ('click', (e) => {
-
+      
         
-            e.preventDefault();
-            localStorage.removeItem('produits');
-
-            location.reload();
-
-            });
-
-            
-                
-            }
-            
-        }
+    }
+    
+}
 
     // Supprimer un élément du panier     
     let supprimerElement = document.getElementsByClassName('btn-supprimer');
@@ -93,6 +71,65 @@ else {
 
 
 
+// ---------------------- CREATION VIDER PANIER & MONTANT TOTAL PRODUITS --------------------------------
+
+
+// Si le panier est vide ne rien faire 
+if (produitEnregistreDansLocalStorage === null) 
+    {}
+
+// Si le panier contient au moins un élément créer le bouton Vider Panier
+else {
+
+// --------------------MONTANT TOTAL PRODUITS --------------------------------------------
+
+    // Création d'un tableau reprenant tous les prix des articles dans le panier
+    let prixTotal = [];
+    console.log(prixTotal);
+
+    for (let p = 0; p < produitEnregistreDansLocalStorage.length; p++) {
+        prixTotal.push(produitEnregistreDansLocalStorage[p].price); 
+    }
+
+    // Calcul de la somme des prix dans le panier
+    let total = prixTotal.reduce((acc, curr)=> acc + curr, 0);
+    console.log(total);
+
+    // Création code HTML pour Montant total
+    let codeMontant_total = `
+    <p>Montant total = <span class="prix-camera">${total} €</span></p>
+    `;
+
+    //Insértion le code HTML Montant total
+    displayPanier.insertAdjacentHTML("beforeend", codeMontant_total);
+
+
+
+// --------------------------- VIDER PANIER --------------------------------------------
+
+    // Création code HTML pour le bouton Vider le panier entierement
+        let codeVider_panier = `
+    <button class="vider-panier"> Vider le panier </button>
+    `;
+    
+    //Insértion le code HTML boutton vider panier
+    displayPanier.insertAdjacentHTML("beforeend", codeVider_panier);
+    
+
+    // Suppression de l'article au moment du click
+    btnVider_panier = document.querySelector('.vider-panier');
+    console.log(btnVider_panier);
+
+    btnVider_panier.addEventListener ('click', (e) => {
+
+        e.preventDefault();
+        localStorage.removeItem('produits');
+
+        location.reload();
+
+        });
+
+}
 
 
 
