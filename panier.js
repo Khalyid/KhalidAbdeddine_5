@@ -3,8 +3,8 @@ console.log(produitEnregistreDansLocalStorage);
 
 
 
-
-let displayPanier = document.getElementById("articles-panier");
+//let block = document.getElementsByClassName('container-panier');
+const displayPanier = document.getElementById("articles-panier");
 
 
 if (produitEnregistreDansLocalStorage === null) {
@@ -16,7 +16,8 @@ if (produitEnregistreDansLocalStorage === null) {
     `;
 
     console.log('je suis vide');
-} else {
+} 
+else {
     // Si panier n'est pas vide afficher les produits
     for (let i=0; i < produitEnregistreDansLocalStorage.length ; i++) {
         let productCamera = produitEnregistreDansLocalStorage[i]
@@ -38,13 +39,36 @@ if (produitEnregistreDansLocalStorage === null) {
                   
                 </div>
         `;
-      
-        
-    }
-    
-}
 
-    
+        // Création code HTML pour le bouton Vider le panier entierement
+
+        let codeVider_panier = `
+        <button class="vider-panier"> Vider le panier </button>
+        `;
+
+        //Insértion le code HTML boutton vider panier
+        displayPanier.insertAdjacentHTML("beforeend", codeVider_panier);
+
+        btnVider_panier = document.querySelector('.vider-panier');
+        console.log(btnVider_panier);
+
+        btnVider_panier.addEventListener ('click', (e) => {
+
+        
+            e.preventDefault();
+            localStorage.removeItem('produits');
+
+            location.reload();
+
+            });
+
+            
+                
+            }
+            
+        }
+
+    // Supprimer un élément du panier     
     let supprimerElement = document.getElementsByClassName('btn-supprimer');
     console.log(supprimerElement);
    
@@ -61,11 +85,17 @@ if (produitEnregistreDansLocalStorage === null) {
         produitEnregistreDansLocalStorage.splice(dataId, 1);
         localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));
 
+        // Rechargement de la page pour afficher le panier sans l'element supprimé
         location.reload();
 
         })
+    }
 
-}
+
+
+
+
+
 
 
 
