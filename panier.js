@@ -31,12 +31,10 @@ else {
                         <p>${productCamera.name}</p> 
                         <p>${productCamera.option} - Quantité 1</p>
                         <p>${productCamera.price + ' ' + '€'} 
-                        <button class="btn-supprimer" data-id="${i}">Supprimer article</button> </p>
+                        <button class="btn-supprimer btn btn-danger" data-id="${i}">Supprimer article</button> </p>
                     </div>
 
-                    <div class="container-montant-total">
-                        <p>Vider le panier</p>
-                    </div>
+                  
                   
                 </div>
         `;
@@ -98,10 +96,11 @@ else {
     // Création code HTML pour Montant total
     let codeMontant_total = `
     <p>Montant total = <span class="prix-camera">${total} €</span></p>
+    <a href="commande.html"><button class=" btn btn-primary btn-lg" type="submit">Valider la commande</button></a>
     `;
 
     //Insértion le code HTML Montant total
-    displayPanier.insertAdjacentHTML("beforeend", codeMontant_total);
+    displayPanier.insertAdjacentHTML("afterend", codeMontant_total);
 
 
 
@@ -109,11 +108,11 @@ else {
 
     // Création code HTML pour le bouton Vider le panier entierement
         let codeVider_panier = `
-    <button class="vider-panier"> Vider le panier </button>
+    <button class="vider-panier btn btn-danger"> Vider le panier </button>
     `;
     
     //Insértion le code HTML boutton vider panier
-    displayPanier.insertAdjacentHTML("beforeend", codeVider_panier);
+    displayPanier.insertAdjacentHTML("afterend", codeVider_panier);
     
 
     // Suppression de l'article au moment du click
