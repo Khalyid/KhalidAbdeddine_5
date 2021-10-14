@@ -96,7 +96,7 @@ else {
     // Création code HTML pour Montant total
     let codeMontant_total = `
     <p>Montant total = <span class="prix-camera">${total} €</span></p>
-    <a href="commande.html"><button class=" btn btn-primary btn-lg" type="submit">Valider la commande</button></a>
+    <a href="FormulaireCommande.html"><button class=" btn btn-primary btn-lg" type="submit">Valider la commande</button></a>
     `;
 
     //Insértion le code HTML Montant total
