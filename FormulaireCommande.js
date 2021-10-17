@@ -1,5 +1,7 @@
 // Récupération des données formulaire
 
+
+
 let produitEnregistreDansLocalStorage =  JSON.parse(localStorage.getItem('produits'));
 
 let btn_envoyer_formulaire = document.querySelector('.btn-envoyer-formulaire');
@@ -7,7 +9,9 @@ console.log(btn_envoyer_formulaire);
     
         btn_envoyer_formulaire.addEventListener('click', (e) => {
             e.preventDefault();
-              
+            
+            let form = document.querySelector('.needs-validation');
+
             formulaire = {
                 nom : document.getElementById('nom').value,
                 prenom : document.getElementById('prenom').value,
@@ -17,13 +21,54 @@ console.log(btn_envoyer_formulaire);
                 codePostale : document.getElementById('codePostale').value
             }
             console.log(formulaire);
+
+            if(form.checkValidity()  === false) {
+                e.preventDefault();
+                e.stopPropagation();
+                form.classList.add('was-validated');
+            }
+
+            localStorage.setItem('infoClients', JSON.stringify(formulaire));
+
+            DonneesEnvoyes = {
+                formulaire,
+                produitEnregistreDansLocalStorage
+            }
+            console.log(DonneesEnvoyes);
+
+            const url = "http://localhost:3000/api/cameras";
             
+            fetch(url , {
+                method: 'POST',
+                body: JSON.stringify(DonneesEnvoyes),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(res => {
+                    let order = JSON.stringify(res)
+                    localStorage.setItem('order', order)
+                })
+
+                .catch(function(error) {
+                    alert('Impossible d\'envoyer la requête');
+                  })
+            
+
+            
+
+           
+
+            /*
             let prenom = formulaire.prenom;
             let nom = formulaire.nom;
             let email = formulaire.email;
             let adresse = formulaire.adresse;
             let ville = formulaire.ville;
             let codePostale = formulaire.codePostale;
+            
+            localStorage.setItem('infoClients', JSON.stringify(formulaire));
             
             let regexLettre = /^[-'a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/ ;
             let regexEmail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/ ;
@@ -34,11 +79,14 @@ console.log(btn_envoyer_formulaire);
                 // Si prenom valide contenant que des lettres
                 if(regexLettre.test(prenom)){
                     console.log('prénom valide');
+                    form.classList.add('was-validated');
                     return true ;
+                  
                 }
                 // Si prenom invalide
                 else{
                     alert('prenom non valide');
+                   
                     return false ;
                 };
                 }
@@ -113,19 +161,26 @@ console.log(btn_envoyer_formulaire);
             };
             }
                 
+            let form = document.querySelector('.needs-validation');
             
-            if(prenomValid() && nomValid() && emailValid() && adresseValid() && villeValid() && codePostaleValid()  ){
+            if(form.checkValidity()  === false) {
+                e.preventDefault();
+                e.stopPropagation();
+         
+                form.classList.add('was-validated');
+            }
+
+            /*if(prenomValid() && nomValid() && emailValid() && adresseValid() && villeValid() && codePostaleValid()  ){
                 localStorage.setItem('infoClients', JSON.stringify(formulaire));
+                
+                
                
             }
-            // Si prénom invalide
+            // Si Formulaire invalide
             else{
-                alert('Formulaire non valide');
+                //alert('Formulaire non valide');
             };
         
-           
-
-            //localStorage.setItem('infoClients', JSON.stringify(formulaire));*/
         
             /*DonnéesEnvoyés = {
                 formulaire,
@@ -139,12 +194,12 @@ console.log(btn_envoyer_formulaire);
     
 
         /*let form = document.querySelector('.needs-validation');
-form.addEventListener('submit', (e) => {
-    if(form.checkValidity() === false) {
-        e.preventDefault();
-        e.stopPropagation();
-        form.classList.add('was-validated');
-    }*/
+        form.addEventListener('submit', (e) => {
+        if(form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+            form.classList.add('was-validated');
+        }*/
 
 
 

@@ -19,8 +19,8 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
                     </div>
 
                     <div class="row">
-                            <a href="/produit.html?${data._id}" class="btn btn-primary col-6"  role="button">Acheter ${data.price/100 + ' ' + '€'}</a>
-                            <a class="btn btn-primary col-4 add-cart" id="btn-envoyer"  role="button">Ajouter au panier</a>            
+                            
+                            <a class="btn btn-primary col-4 add-cart" id="btn-envoyer"  role="button">Ajouter au panier ${data.price/100 + ' ' + '€'}</a>            
                     </div>
                     <form>
                     <label for="option_produit"> Choisir l'option</label>
