@@ -1,6 +1,8 @@
+// Panier ... a completer
+
+
 let produitEnregistreDansLocalStorage =  JSON.parse(localStorage.getItem('produits'));
 console.log(produitEnregistreDansLocalStorage);
-
 
 
 //let block = document.getElementsByClassName('container-panier');
@@ -29,7 +31,7 @@ else {
                     <div id="container-recapitulatif" >
                         <img class="col" src="${productCamera.imageUrl}" alt="${productCamera.name}">
                         <p>${productCamera.name}</p> 
-                        <p>${productCamera.option} - Quantité 1</p>
+                        <p>${productCamera.option} -  Quantité ${productCamera.quantite}</span>  </p>
                         <p>${productCamera.price + ' ' + '€'} 
                         <button class="btn-supprimer btn btn-danger" data-id="${i}">Supprimer article</button> </p>
                     </div>
@@ -44,8 +46,12 @@ else {
     
 }
 
+    /*let quantite_produit = document.querySelector(".quantite-produit").value;
+    console.log(quantite_produit);*/
+
     // Supprimer un élément du panier     
     let supprimerElement = document.getElementsByClassName('btn-supprimer');
+    console.log('btn supprimé');
     console.log(supprimerElement);
    
     for (let i=0; i < supprimerElement.length; i++){
@@ -54,6 +60,7 @@ else {
         event.preventDefault();
         
         let dataId = event.target.getAttribute('data-id');
+        console.log(dataId);
 
         let select = produitEnregistreDansLocalStorage[dataId];
         console.log(select);
@@ -69,6 +76,20 @@ else {
 
 
 
+/*for (let i=0; i < btnMoins.length; i++){ 
+
+    btnMoins[i].addEventListener('click', () => {
+    
+     
+
+    
+    })
+}*/
+
+
+
+
+
 // ---------------------- CREATION VIDER PANIER & MONTANT TOTAL PRODUITS --------------------------------
 
 
@@ -80,7 +101,9 @@ if (produitEnregistreDansLocalStorage === null)
 else {
 
 // --------------------MONTANT TOTAL PRODUITS --------------------------------------------
+    // Prix total d'un seul produit
 
+   
     // Création d'un tableau reprenant tous les prix des articles dans le panier
     let prixTotal = [];
     console.log(prixTotal);

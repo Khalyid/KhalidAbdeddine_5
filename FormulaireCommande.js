@@ -2,6 +2,8 @@
 
 
 
+
+
 let produitEnregistreDansLocalStorage =  JSON.parse(localStorage.getItem('produits'));
 
 let btn_envoyer_formulaire = document.querySelector('.btn-envoyer-formulaire');
@@ -12,15 +14,17 @@ console.log(btn_envoyer_formulaire);
             
             let form = document.querySelector('.needs-validation');
 
-            formulaire = {
-                nom : document.getElementById('nom').value,
-                prenom : document.getElementById('prenom').value,
+            contact = {
+                firstName : document.getElementById('nom').value,
+                lastName : document.getElementById('prenom').value,
                 email : document.getElementById('email').value,
-                adresse : document.getElementById('adresse').value,
-                ville : document.getElementById('ville').value,
+                address : document.getElementById('adresse').value,
+                city : document.getElementById('ville').value,
                 codePostale : document.getElementById('codePostale').value
             }
-            console.log(formulaire);
+            console.log('liste contact');
+
+            console.log(contact);
 
             if(form.checkValidity()  === false) {
                 e.preventDefault();
@@ -28,34 +32,50 @@ console.log(btn_envoyer_formulaire);
                 form.classList.add('was-validated');
             }
 
-            localStorage.setItem('infoClients', JSON.stringify(formulaire));
+            localStorage.setItem('infoClients', JSON.stringify(contact));
+
+            
+            // Données a envoyer au serveur 
+
+            let products = [] ;
+            produitEnregistreDansLocalStorage.forEach(product => {
+              products.push(product.orderId)
+            });
+            console.log('tableau des products');
+            console.log(products);
 
             DonneesEnvoyes = {
-                formulaire,
-                produitEnregistreDansLocalStorage
+                contact,
+                products 
             }
+            console.log('DonneesEnvoyes');
             console.log(DonneesEnvoyes);
 
-            const url = "http://localhost:3000/api/cameras";
-            
-            fetch(url , {
+
+            const url = "http://localhost:3000/api/cameras/order";
+            const method = {
                 method: 'POST',
                 body: JSON.stringify(DonneesEnvoyes),
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
+            }
+            
+            fetch(url , method)
                 .then(res => res.json())
-                .then(res => {
-                    let order = JSON.stringify(res)
-                    localStorage.setItem('order', order)
+                .then(data => {
+                    let commande = JSON.stringify(data)
+                    localStorage.setItem('commande', commande)
                 })
 
                 .catch(function(error) {
                     alert('Impossible d\'envoyer la requête');
                   })
-            
+        
 
+
+        });          
+                
             
 
            
@@ -188,7 +208,7 @@ console.log(btn_envoyer_formulaire);
             }
         
             console.log(DonnéesEnvoyés);*/
-        });
+        
         
 
     

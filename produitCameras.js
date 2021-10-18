@@ -18,20 +18,29 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
                         <p>${data.description}</p>
                     </div>
 
-                    <div class="row">
-                            
-                            <a class="btn btn-primary col-4 add-cart" id="btn-envoyer"  role="button">Ajouter au panier ${data.price/100 + ' ' + '€'}</a>            
-                    </div>
                     <form>
+
+                    <label for="option_produit"> Qantité </label>
+                        <input id="quantite-produit" name="option_produit" type="number" min="1" value="1" "></input>
+
                     <label for="option_produit"> Choisir l'option</label>
                         <select name="option_produit" id="option_produit">
                             <option value="Gris">Gris</option>
                             <option value="Noir">Noir</option>
                         </select>
                     </form>
+
+                    <div class="row">
+                            
+                            <a class="btn btn-primary col-4 add-cart" id="btn-envoyer"  role="button">Ajouter au panier ${data.price/100 + ' ' + '€'}</a>            
+                    </div>
+                    
                     
                 </div>
           `
+
+          let quantite_produit = document.querySelector("#quantite-produit");
+          console.log(quantite_produit);
 
           const idForm = document.querySelector('#option_produit');
           console.log(idForm);
@@ -49,10 +58,12 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
             console.log(choixForm)
 
             let panierProduit = {
+            orderId : data._id ,
             name : data.name,
-            price : data.price/100,
+            price : data.price/100 * quantite_produit.value,
             imageUrl : data.imageUrl,
-            option : choixForm
+            option : choixForm,
+            quantite : quantite_produit.value
             }
 
           console.log(panierProduit)
