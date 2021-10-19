@@ -74,7 +74,7 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
             // fonction pour une fenêtre popup de confirmation de commande ou annulation
             const popupConfirmation = () => {
                 if (window.confirm(` ${data.name} de couleur ${choixForm} à bien été ajouté au panier
-                Consulter le panier OK ou revenir à l'accueil ANNULER` )) {
+                Consulter le panier OK ou poursuivre vos achats ANNULER` )) {
                         window.location.href = 'panier.html';
                     } else {
                         window.location.href = 'index.html';

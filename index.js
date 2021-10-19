@@ -14,7 +14,7 @@ fetch ("http://localhost:3000/api/cameras")
                         <p>${article.description}</p>
                     </div>
                     <div class="row">
-                            <a href="/produit.html?id=${article._id}" class="btn btn-primary acheterpanier col-6"  role="button">Acheter ${article.price/100 + ' ' + '€'}</a>
+                            <a href="/produit.html?id=${article._id}" class="btn btn-primary acheterpanier col-6"  role="button">Voir l'article ${article.price/100 + ' ' + '€'}</a>
                             
                     </div>
                     

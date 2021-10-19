@@ -30,11 +30,13 @@ console.log(recapitulatifCommande);*/
 
 commandeProduits.forEach(elementProduit => {
 
-    let recapitulatifCommande = `<div id="recapitulatif" >
-    <img class="col" src="${elementProduit.imageUrl}" alt="${elementProduit.name}">
-    <p>${elementProduit.name}</p> 
-    <p>${elementProduit.option} -  Quantité ${elementProduit.quantite}</span>  </p>
-    <p>${elementProduit.price + ' ' + '€'} 
+    let recapitulatifCommande = `<div class="row card-body" id="recapitulatif" >
+    <img class="col-6" src="${elementProduit.imageUrl}" alt="${elementProduit.name}">
+        <div class="description"
+            <h3 class="card-title >${elementProduit.name}</h3> 
+            <p class="card-text">${elementProduit.option} -  Quantité ${elementProduit.quantite}</span>  </p>
+            <p class="card-text">${elementProduit.price + ' ' + '€'} 
+        </div>
     </div>
     `
     listeCommande.insertAdjacentHTML("afterend", recapitulatifCommande);
