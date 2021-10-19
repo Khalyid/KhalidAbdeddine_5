@@ -11,6 +11,7 @@ console.log(btn_envoyer_formulaire);
     
         btn_envoyer_formulaire.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             
             let form = document.querySelector('.needs-validation');
 
@@ -30,12 +31,10 @@ console.log(btn_envoyer_formulaire);
                 e.preventDefault();
                 e.stopPropagation();
                 form.classList.add('was-validated');
-            }
-
-            localStorage.setItem('infoClients', JSON.stringify(contact));
-
-            
-            // Données a envoyer au serveur 
+                
+                
+            }else {
+                // Données a envoyer au serveur 
 
             let products = [] ;
             produitEnregistreDansLocalStorage.forEach(product => {
@@ -66,13 +65,63 @@ console.log(btn_envoyer_formulaire);
                 .then(data => {
                     let commande = JSON.stringify(data)
                     localStorage.setItem('commande', commande)
-                })
 
+                    window.location.href = 'ConfirmationCommande.html';
+                
+                   // window.location.href = 'ConfirmationCommande.html';
+                })
+              
                 .catch(function(error) {
                     alert('Impossible d\'envoyer la requête');
                   })
         
+            }
 
+            //localStorage.setItem('infoClients', JSON.stringify(contact));
+
+            
+            // Données a envoyer au serveur 
+
+    /*        let products = [] ;
+            produitEnregistreDansLocalStorage.forEach(product => {
+              products.push(product.orderId)
+            });
+            console.log('tableau des products');
+            console.log(products);
+
+            DonneesEnvoyes = {
+                contact,
+                products 
+            }
+            console.log('DonneesEnvoyes');
+            console.log(DonneesEnvoyes);
+
+
+            const url = "http://localhost:3000/api/cameras/order";
+            const method = {
+                method: 'POST',
+                body: JSON.stringify(DonneesEnvoyes),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            
+            fetch(url , method)
+                .then(res => res.json())
+                .then(data => {
+                    let commande = JSON.stringify(data)
+                    localStorage.setItem('commande', commande)
+
+                        //window.location.href = 'ConfirmationCommande.html';
+                
+                   // window.location.href = 'ConfirmationCommande.html';
+                })
+              
+                .catch(function(error) {
+                    alert('Impossible d\'envoyer la requête');
+                  })
+        
+*/
 
         });          
                 
