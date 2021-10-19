@@ -68,7 +68,7 @@ console.log(btn_envoyer_formulaire);
 
                     window.location.href = 'ConfirmationCommande.html';
                 
-                   // window.location.href = 'ConfirmationCommande.html';
+                  
                 })
               
                 .catch(function(error) {
