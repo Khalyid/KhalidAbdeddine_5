@@ -14,26 +14,23 @@
 
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="row">
-                <nav class="col navbar navbar-expand-lg bg-dark navbar-dark">
-                    <a class="navbar-brand" href="...">Orinoco</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div id="navbarContent" class="d-flex justify-content-end collapse navbar-collapse">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Accueil</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#"><i class="fas fa-shopping-cart"> Panier</i></a>
-                            </li>
-                        </ul>
-                     </div>
-                </nav>
-            </div>
-        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">Orinoco</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse text-white" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="panier.html">Panier</a>
+                        </li>
+                    </ul>
+                </div>
+        </nav>
+        
         
         <div class="container-fluid">
             <div class="row ">
@@ -47,17 +44,30 @@
             <div class="row" id="articles">
                 <!--
                     ` 
-                <div class="col card">
+                 <div class="col-10 card">
                     <div class="card-body" >
                         <img class="col" src="${data.imageUrl}" alt="${data.name}">
                         <h2 class"card-title ">${data.name}</h2>
                         <p>${data.description}</p>
                     </div>
 
+                    <form>
+
+                    <label for="option_produit"> <span class="font-weight-bold">Quantité : </span> </label>
+                        <input id="quantite-produit" name="option_produit" type="number" min="1" value="1" "></input>
+
+                    <label for="option_produit"> <span class="font-weight-bold">Choix lentilles :</span> </label>
+                        <select name="option_produit" id="option_produit">
+                            <option value="35mm 1.4">35mm 1.4</option>
+                            <option value="50mm 1.6">50mm 1.6</option>
+                        </select>
+                    </form>
+
                     <div class="row">
-                            <a href="/produit.html?${data._id}" class="btn btn-primary col-6"  role="button">Acheter ${data.price/100 + ' ' + '€'}</a>
-                            <a class="btn btn-primary col-4 add-cart"  role="button">Ajouter au panier</a>
+                            
+                            <a class="btn btn-primary col-4 add-cart" id="btn-envoyer"  role="button">Ajouter au panier ${data.price/100 + ' ' + '€'}</a>            
                     </div>
+                    
                     
                 </div>
           `

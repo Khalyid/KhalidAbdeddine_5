@@ -11,7 +11,7 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
 
           articlesContainer.innerHTML += 
           ` 
-                <div class="col card">
+                <div class="col-10 card">
                     <div class="card-body" >
                         <img class="col" src="${data.imageUrl}" alt="${data.name}">
                         <h2 class"card-title ">${data.name}</h2>
@@ -20,13 +20,13 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
 
                     <form>
 
-                    <label for="option_produit"> Qantité </label>
+                    <label for="option_produit"> <span class="font-weight-bold">Quantité : </span> </label>
                         <input id="quantite-produit" name="option_produit" type="number" min="1" value="1" "></input>
 
-                    <label for="option_produit"> Choisir l'option</label>
+                    <label for="option_produit"> <span class="font-weight-bold">Choix lentilles :</span> </label>
                         <select name="option_produit" id="option_produit">
-                            <option value="Gris">Gris</option>
-                            <option value="Noir">Noir</option>
+                            <option value="35mm 1.4">35mm 1.4</option>
+                            <option value="50mm 1.6">50mm 1.6</option>
                         </select>
                     </form>
 
@@ -60,7 +60,8 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
             let panierProduit = {
             orderId : data._id ,
             name : data.name,
-            price : data.price/100 * quantite_produit.value,
+            prixUnitaire : data.price/100,
+            totalPrice : data.price/100 * quantite_produit.value,
             imageUrl : data.imageUrl,
             option : choixForm,
             quantite : quantite_produit.value

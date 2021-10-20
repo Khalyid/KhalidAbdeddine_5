@@ -8,7 +8,7 @@ fetch ("http://localhost:3000/api/cameras")
         for (let article of data) {
           articlesContainer.innerHTML += 
           ` 
-                <div class="col-12 col-lg-5 card">
+                <div class="col-12 col-lg-5 card px-4">
                     <div class="card-body" >
                         <img class="col" src="${article.imageUrl}" alt="${article.name}">
                         <h2 class"card-title ">${article.name}</h2>
