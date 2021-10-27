@@ -1,6 +1,8 @@
 // Panier ... a completer
 
 
+
+
 let produitEnregistreDansLocalStorage =  JSON.parse(localStorage.getItem('produits'));
 console.log(produitEnregistreDansLocalStorage);
 
@@ -33,8 +35,9 @@ else {
                         <div class="col-sm-4 description">
                             <h2 class="card-title ">${productCamera.name}</h2>
                             <p class="card-text"> <span class="font-weight-bold">Choix lentilles :</span>  ${productCamera.option}     </p>
-                            <p class="card-text"><span class="font-weight-bold">Quantité : </span> ${productCamera.quantite} </p>
-                            <p class="card-text"> <span class="font-weight-bold">Prix total : </span> ${productCamera.totalPrice + ' ' + '€'} </p>
+                            <p class="card-text quantite"><span class="font-weight-bold">Quantité :</span> <button class="bouton-moins btn-danger"> - </button>  ${productCamera.quantite} <button class="bouton-plus btn-success"> + </button> </p>
+                            <p class="card-text"> <span class="font-weight-bold">Prix Unitaire : </span> ${productCamera.prixUnitaire + ' ' + '€'} </p>
+                           
                             
                             <button class="btn-supprimer btn btn-danger" data-id="${i}">Supprimer article</button> 
                         </div>
@@ -49,7 +52,7 @@ else {
         
     }
 }
-console.log(produitEnregistreDansLocalStorage[0].quantite);
+
     
     // Supprimer un élément du panier     
     let supprimerElement = document.getElementsByClassName('btn-supprimer');
@@ -64,10 +67,11 @@ console.log(produitEnregistreDansLocalStorage[0].quantite);
         let dataId = event.target.getAttribute('data-id');
         console.log(dataId);
 
-        let select = produitEnregistreDansLocalStorage[dataId];
+        let select = produitEnregistreDansLocalStorage[i];
         console.log(select);
 
-        produitEnregistreDansLocalStorage[dataId].splice(dataId, 1);
+        produitEnregistreDansLocalStorage.splice(dataId, 1);
+
         localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));
 
         // Rechargement de la page pour afficher le panier sans l'element supprimé
@@ -76,6 +80,60 @@ console.log(produitEnregistreDansLocalStorage[0].quantite);
         })
     }
 
+        //---------------------------MODIFIER QUANTITE-------------------------------
+
+        
+        // Diminuer une quantité
+
+        let boutonMoins = document.getElementsByClassName('bouton-moins');
+        console.log(boutonMoins);
+
+        console.log(produitEnregistreDansLocalStorage);
+        let nb = parseInt(produitEnregistreDansLocalStorage[0].quantite);
+        let nbr = 1;
+        for (let i=0; i < boutonMoins.length; i++){
+
+            boutonMoins[i].addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if(produitEnregistreDansLocalStorage[i].quantite > 1){
+                    produitEnregistreDansLocalStorage[i].quantite--;
+
+                    console.log(produitEnregistreDansLocalStorage);
+
+                    localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));
+
+                    // Rechargement de la page pour afficher le panier sans l'element supprimé
+                    location.reload();
+                }
+            })
+        };
+
+        // Augmenter une quantité
+
+        let boutonPlus = document.getElementsByClassName('bouton-plus');
+        console.log(boutonPlus);
+
+        console.log(produitEnregistreDansLocalStorage);
+       
+        for (let i=0; i < boutonPlus.length; i++){
+            boutonPlus[i].addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            
+                produitEnregistreDansLocalStorage[i].quantite++;
+
+                console.log(produitEnregistreDansLocalStorage);
+
+                localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));
+
+                // Rechargement de la page pour afficher le panier sans l'element supprimé
+                location.reload();        
+            })
+        };
+
+   
 
 
 
@@ -132,7 +190,7 @@ else {
 
   
     for (let p = 0; p < produitEnregistreDansLocalStorage.length; p++) {
-        prixTotal.push(produitEnregistreDansLocalStorage[p].totalPrice); 
+        prixTotal.push((produitEnregistreDansLocalStorage[p].prixUnitaire)*(produitEnregistreDansLocalStorage[p].quantite)); 
     }
 
     // Calcul de la somme des prix dans le panier
@@ -143,23 +201,27 @@ else {
     {
          // Afficher le panier est vide
         displayPanier.innerHTML = `
-        <div class="panier-vide">
-        <p>Le panier est vide</p> 
+        <div class="panier-vide container-fluid text-center">
+            <p class=" h1  mt-5">Le panier est vide :(</p> 
+            <a href="index.html"><button class="btn-secondary"> Revenir aux articles</button> </a>
         </div>
         `;
     }
     else{
+
     // Création code HTML pour Montant total
     let codeMontant_total = `
-    <p class="ml-5 text-right mr-5 h5"> <span class="font-weight-bold">Montant total : </span>  <span class="prix-camera">${total} €</span></p>
-    <div>
-        <a href="FormulaireCommande.html" class="mx-4" ><button class=" btn btn-primary btn-lg " type="submit">Valider la commande</button></a>
-    </div>
-    <button class="vider-panier btn btn-danger text-right"> Vider le panier </button>
+        <p class="ml-5 text-right mr-5 h5"> <span class="font-weight-bold">Montant total : </span>  <span class="prix-camera">${total} €</span></p>
+        <div>
+            <a href="FormulaireCommande.html" class="mx-4" ><button class=" btn btn-primary btn-lg " type="submit">Valider la commande</button></a>
+        </div>
+        <button class="vider-panier btn btn-danger text-right"> Vider le panier </button>
     `;
 
     //Insértion le code HTML Montant total
     displayPanier.insertAdjacentHTML("afterend", codeMontant_total);
+
+   
 
       // Suppression de l'article au moment du click
       btnVider_panier = document.querySelector('.vider-panier');
