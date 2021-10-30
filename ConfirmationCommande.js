@@ -1,16 +1,20 @@
 let produitEnregistreDansLocalStorage =  JSON.parse(localStorage.getItem('produits'));
+console.log('produit dans LS : ' + produitEnregistreDansLocalStorage);
 
 let Commande = JSON.parse(localStorage.getItem('commande'));
-console.log(Commande);
+console.log('Commande :' + Commande);
 
 let commandeProduits = JSON.parse(localStorage.getItem('produits'));
 
+if(produitEnregistreDansLocalStorage !== null || Commande !== null){
 let contact = Commande.contact;
 console.log('contact est: ');
 console.log(contact);
 
 let prenom = contact.firstName;
 let nom = contact.lastName;
+
+let confirmationCommande = document.getElementById('confirmation-commande');
 
 
 let listeCommande = document.getElementById('liste-commande');
@@ -71,33 +75,22 @@ listeCommande.innerHTML += `
     
     });
 
-    if( document.refreshForm.visited.value == "" ){
-    localStorage.removeItem('produits');
-    localStorage.removeItem('commande');
+        localStorage.clear()
+}
+        
+        else{
+            window.location.href="index.html";
+        }
+       
+        
 
-    window.location.href='index.html'
-    }
-    else{
-        window.location.href='index.html'
-    }
+ 
 
-    if(location.reload){
-    window.localStorage.clear()
-    }
-    
-
-    
   
 
 
- 
-
- 
-
-    
    
 
 
-
-
-
+    
+  

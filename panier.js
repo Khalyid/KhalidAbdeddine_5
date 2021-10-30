@@ -14,8 +14,8 @@ const displayPanier = document.getElementById("articles-panier");
 if (produitEnregistreDansLocalStorage === null) {
     // Afficher le panier est vide
     displayPanier.innerHTML = `
-    <div class="panier-vide">
-    <p>Le panier est vide</p> 
+    <div class="panier-vide h3 container my-5" >
+    <p>Le panier est vide pour découvrir l'ensemble de nos articles <a href="index.html"><button type="button" class="btn btn-success">c'est par ici !</button> </a></p> 
     </div>
     `;
 
@@ -144,41 +144,7 @@ else {
 
 // ---------------------- CREATION VIDER PANIER & MONTANT TOTAL PRODUITS --------------------------------
 
-/* -----------------------------------------------------------------------------------console.log(produitEnregistreDansLocalStorage.length);
-// Si le panier est vide ne rien faire 
-if (produitEnregistreDansLocalStorage.length > 0) 
-    {}
 
-// Si le panier contient au moins un élément créer le bouton Vider Panier
-else {
-
-
-
-// --------------------------- VIDER PANIER --------------------------------------------
-
-    // Création code HTML pour le bouton Vider le panier entierement
-        let codeVider_panier = `
-    <button class="vider-panier btn btn-danger text-right"> Vider le panier </button>
-    `;
-    
-    //Insértion le code HTML boutton vider panier
-    displayPanier.insertAdjacentHTML("afterend", codeVider_panier);
-    
-
-    // Suppression de l'article au moment du click
-    btnVider_panier = document.querySelector('.vider-panier');
-    console.log(btnVider_panier);
-
-    btnVider_panier.addEventListener ('click', (e) => {
-
-        e.preventDefault();
-        localStorage.removeItem('produits');
-
-        location.reload();
-
-        });
-
-    }------------------------------------------- -----------------------------------------------------------------------------------*/
 
 // --------------------MONTANT TOTAL PRODUITS --------------------------------------------
     // Prix total d'un seul produit
@@ -209,13 +175,13 @@ else {
     }
     else{
 
-    // Création code HTML pour Montant total
+    // Création code HTML pour Montant total et vider panier
     let codeMontant_total = `
         <p class="ml-5 text-right mr-5 h5"> <span class="font-weight-bold">Montant total : </span>  <span class="prix-camera">${total} €</span></p>
         <div>
             <a href="FormulaireCommande.html" class="mx-4" ><button class=" btn btn-primary btn-lg " type="submit">Valider la commande</button></a>
         </div>
-        <button class="vider-panier btn btn-danger text-right"> Vider le panier </button>
+        <button class="vider-panier btn btn-danger text-right ml-5"> Vider le panier </button>
     `;
 
     //Insértion le code HTML Montant total
@@ -223,7 +189,7 @@ else {
 
    
 
-      // Suppression de l'article au moment du click
+      // Vider panier au moment du click
       btnVider_panier = document.querySelector('.vider-panier');
       console.log(btnVider_panier);
   
