@@ -1,13 +1,8 @@
-// Panier ... a completer
-
-
-
+// ---------------------------------------------------------- AFFICHAGE DES PRODUITS DANS LE PANIER ---------------------------------------------------------------
 
 let produitEnregistreDansLocalStorage =  JSON.parse(localStorage.getItem('produits'));
 console.log(produitEnregistreDansLocalStorage);
 
-
-//let block = document.getElementsByClassName('container-panier');
 const displayPanier = document.getElementById("articles-panier");
 
 
@@ -67,10 +62,7 @@ else {
         let dataId = event.target.getAttribute('data-id');
         console.log(dataId);
 
-        let select = produitEnregistreDansLocalStorage[i];
-        console.log(select);
-
-        produitEnregistreDansLocalStorage.splice(dataId, 1);
+        produitEnregistreDansLocalStorage.splice(dataId,1);
 
         localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));
 
@@ -89,8 +81,6 @@ else {
         console.log(boutonMoins);
 
         console.log(produitEnregistreDansLocalStorage);
-        let nb = parseInt(produitEnregistreDansLocalStorage[0].quantite);
-        let nbr = 1;
         for (let i=0; i < boutonMoins.length; i++){
 
             boutonMoins[i].addEventListener('click', (e) => {
@@ -98,6 +88,7 @@ else {
                 e.stopPropagation();
 
                 if(produitEnregistreDansLocalStorage[i].quantite > 1){
+                    
                     produitEnregistreDansLocalStorage[i].quantite--;
 
                     console.log(produitEnregistreDansLocalStorage);
