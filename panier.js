@@ -24,7 +24,6 @@ else {
         ` 
                 <div class="  mx-5 card">
                     
-
                     <div class="row card-body" id="container-recapitulatif" >
                         <img class="col-lg-4 col-sm-8"  src="${productCamera.imageUrl}" alt="${productCamera.name}">
                         <div class="col-sm-4 description">
@@ -39,8 +38,6 @@ else {
                         
                     </div>
 
-                  
-                  
                 </div>
         `;
      
@@ -88,7 +85,7 @@ else {
                 e.stopPropagation();
 
                 if(produitEnregistreDansLocalStorage[i].quantite > 1){
-                    
+
                     produitEnregistreDansLocalStorage[i].quantite--;
 
                     console.log(produitEnregistreDansLocalStorage);

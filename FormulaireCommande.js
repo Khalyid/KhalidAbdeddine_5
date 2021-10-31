@@ -1,9 +1,5 @@
 // Récupération des données formulaire
 
-
-
-
-
 let produitEnregistreDansLocalStorage =  JSON.parse(localStorage.getItem('produits'));
 
 let btn_envoyer_formulaire = document.querySelector('.btn-envoyer-formulaire');
@@ -40,6 +36,7 @@ console.log(btn_envoyer_formulaire);
             produitEnregistreDansLocalStorage.forEach(product => {
               products.push(product.orderId)
             });
+
             console.log('tableau des products');
             console.log(products);
 
@@ -68,7 +65,6 @@ console.log(btn_envoyer_formulaire);
 
                     window.location.href = 'ConfirmationCommande.html';
                 
-                  
                 })
               
                 .catch(function(error) {
@@ -76,58 +72,14 @@ console.log(btn_envoyer_formulaire);
                   })
         
             }
-
-            //localStorage.setItem('infoClients', JSON.stringify(contact));
-
-            
-            // Données a envoyer au serveur 
-
-    /*        let products = [] ;
-            produitEnregistreDansLocalStorage.forEach(product => {
-              products.push(product.orderId)
-            });
-            console.log('tableau des products');
-            console.log(products);
-
-            DonneesEnvoyes = {
-                contact,
-                products 
-            }
-            console.log('DonneesEnvoyes');
-            console.log(DonneesEnvoyes);
-
-
-            const url = "http://localhost:3000/api/cameras/order";
-            const method = {
-                method: 'POST',
-                body: JSON.stringify(DonneesEnvoyes),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-            
-            fetch(url , method)
-                .then(res => res.json())
-                .then(data => {
-                    let commande = JSON.stringify(data)
-                    localStorage.setItem('commande', commande)
-
-                        //window.location.href = 'ConfirmationCommande.html';
-                
-                   // window.location.href = 'ConfirmationCommande.html';
-                })
-              
-                .catch(function(error) {
-                    alert('Impossible d\'envoyer la requête');
-                  })
-        
-*/
 
         });          
                 
             
 
            
+
+        //----------TEST Validation formulaire sans utilisé pattern --------
 
             /*
             let prenom = formulaire.prenom;

@@ -21,7 +21,7 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
                     <form>
 
                     <label for="option_produit"> <span class="font-weight-bold">Quantité : </span> </label>
-                        <input id="quantite-produit" name="option_produit" type="number" min="1" value="1" "></input>
+                        <input id="quantite-produit" name="option_produit" type="number"  min="1" value="1" "></input>
 
                     <label for="option_produit"> <span class="font-weight-bold">Choix lentilles :</span> </label>
                         <select name="option_produit" id="option_produit">
@@ -39,18 +39,17 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
                 </div>
           `
 
+
+          // ------------------------------ AJOUTER PRODUIT AU PANIER -------------------------------
+
           let quantite_produit = document.querySelector("#quantite-produit");
           console.log(quantite_produit);
 
           const idForm = document.querySelector('#option_produit');
           console.log(idForm);
 
- 
-
           const btnEnvoyerPanier = document.querySelector('#btn-envoyer');
           console.log(btnEnvoyerPanier)
-
-
 
           btnEnvoyerPanier.addEventListener('click', (e)=> {
 
