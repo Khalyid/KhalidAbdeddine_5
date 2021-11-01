@@ -32,7 +32,7 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
 
                     <div class="row">
                             
-                            <a class="btn btn-primary col-4 add-cart" id="btn-envoyer"  role="button">Ajouter au panier ${data.price/100 + ' ' + '€'}</a>            
+                            <a class="btn btn-primary col-4 add-cart text-light" id="btn-envoyer"  role="button">Ajouter au panier ${data.price/100 + ' ' + '€'}</a>            
                     </div>
                     
                     
