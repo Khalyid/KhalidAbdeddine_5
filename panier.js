@@ -6,6 +6,8 @@ console.log(produitEnregistreDansLocalStorage);
 const displayPanier = document.getElementById("articles-panier");
 
 
+
+
 if (produitEnregistreDansLocalStorage === null) {
     // Afficher le panier est vide
     displayPanier.innerHTML = `
@@ -16,10 +18,13 @@ if (produitEnregistreDansLocalStorage === null) {
 
     console.log('je suis vide');
 } 
+
+
 else {
     // Si panier n'est pas vide afficher les produits
     for (let i=0; i < produitEnregistreDansLocalStorage.length ; i++) {
         let productCamera = produitEnregistreDansLocalStorage[i]
+        
         displayPanier.innerHTML += 
         ` 
                 <div class="  mx-5 card">
@@ -40,7 +45,6 @@ else {
 
                 </div>
         `;
-     
         
     }
 }

@@ -1,7 +1,7 @@
 
 const urlParams = new URLSearchParams(window.location.search) ;
-const productId = urlParams.get("id");
-
+let productId = urlParams.get("id");
+console.log(productId);
 
 fetch (`http://localhost:3000/api/cameras/${productId}`)
     .then( res => res.json())
@@ -39,7 +39,7 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
                 </div>
           `
 
-
+        
           // ------------------------------ AJOUTER PRODUIT AU PANIER -------------------------------
 
           let quantite_produit = document.querySelector("#quantite-produit");
@@ -52,6 +52,10 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
           console.log(btnEnvoyerPanier)
 
           btnEnvoyerPanier.addEventListener('click', (e)=> {
+              e.preventDefault();
+              e.stopPropagation();
+
+    
 
             const choixForm = idForm.value;
             console.log(choixForm)
@@ -66,36 +70,59 @@ fetch (`http://localhost:3000/api/cameras/${productId}`)
             quantite : quantite_produit.value
             }
 
-          console.log(panierProduit)
+            console.log(panierProduit)
 
-          //Création variable qui sera mise dans localstorage avec sa clé et sa valeur
-          let produitEnregistreDansLocalStorage = JSON.parse(localStorage.getItem('produits'));
+            //Création variable qui sera mise dans localstorage avec sa clé et sa valeur
+            let produitEnregistreDansLocalStorage = JSON.parse(localStorage.getItem('produits'));
 
-            // fonction pour une fenêtre popup de confirmation de commande ou annulation
-            const popupConfirmation = () => {
-                if (window.confirm(` ${data.name} de couleur ${choixForm} à bien été ajouté au panier
-                Consulter le panier OK ou poursuivre vos achats ANNULER` )) {
-                        window.location.href = 'panier.html';
-                    } else {
-                        window.location.href = 'index.html';
+                // fonction pour une fenêtre popup de confirmation de commande ou annulation
+                const popupConfirmation = () => {
+                    if (window.confirm(` ${data.name} de couleur ${choixForm} à bien été ajouté au panier
+                    Consulter le panier OK ou poursuivre vos achats ANNULER` )) {
+                            window.location.href = 'panier.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
                     }
-                }
 
-          // S'il y a déja des produits dans localstorage
-          if (produitEnregistreDansLocalStorage ) {
-            produitEnregistreDansLocalStorage.push(panierProduit);
-            localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));
-            popupConfirmation();
-          } 
-          // S'il y a rien localstorage
-          else {
-            produitEnregistreDansLocalStorage = [];
-            produitEnregistreDansLocalStorage.push(panierProduit);
-            localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));
-            console.log(produitEnregistreDansLocalStorage);
-            popupConfirmation();
-          }
-          })
+         
+            let exist = false;
+            // S'il y a aucun produit localstorage
+            if (produitEnregistreDansLocalStorage == null ) {
+                produitEnregistreDansLocalStorage = [];
+                exist = true;
+                produitEnregistreDansLocalStorage.push(panierProduit);
+                localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));
+                console.log(produitEnregistreDansLocalStorage);
+                popupConfirmation();
+               
+            } 
+            
+            // S'il y a déja des produits dans localstorage 
+            else {    
+                
+                //Verifier si le produit existe déja pour augmenter seulement la quantité
+               for (let i = 0; i < produitEnregistreDansLocalStorage.length; i++) {
+                    if(produitEnregistreDansLocalStorage[i].orderId == panierProduit.orderId){
+                        produitEnregistreDansLocalStorage[i].quantite = +produitEnregistreDansLocalStorage[i].quantite + +panierProduit.quantite;
+                        localStorage.setItem("produits", JSON.stringify(produitEnregistreDansLocalStorage));
+                        exist = true;
+                        //popupConfirmation();  
+                    }
+                }    
+                    
+                    // Si le produit n'existe pas le créer
+                    if(exist == false) {
+                     
+                        produitEnregistreDansLocalStorage.push(panierProduit);
+                        localStorage.setItem('produits', JSON.stringify(produitEnregistreDansLocalStorage));  
+                        //popupConfirmation(); 
+                    } 
+                    popupConfirmation()
+               
+            };
+                                   
+            }); 
 
        
-    })
+    });
